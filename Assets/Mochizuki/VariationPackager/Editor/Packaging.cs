@@ -63,7 +63,7 @@ namespace Mochizuki.VariationPackager
         private void CreatePackage()
         {
             var meta = ReadMetadata();
-            if (ValidateProperties(meta))
+            if (!ValidateProperties(meta))
                 return;
 
             try
@@ -98,7 +98,7 @@ namespace Mochizuki.VariationPackager
                 return false;
             if (meta.Describe.Variations.Select(w => w.Name).Distinct().Count() != meta.Describe.Variations.Count)
                 return false;
-            return !meta.Describe.Variations.All(w => w?.UnityPackage.Includes != null && w.UnityPackage.Includes.Count > 0);
+            return meta.Describe.Variations.All(w => w?.UnityPackage.Includes != null && w.UnityPackage.Includes.Count > 0);
         }
 
         private static void CreatePackage(Package meta, PackageVariation variation)
