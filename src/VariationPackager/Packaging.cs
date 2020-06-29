@@ -7,15 +7,17 @@ using System.Linq;
 using Microsoft.Extensions.FileSystemGlobbing;
 using Microsoft.Extensions.FileSystemGlobbing.Abstractions;
 
-using Mochizuki.VariationPackager.Internal.Models;
+using Mochizuki.VariationPackager.Models.Interface;
 
 using Newtonsoft.Json;
 
 using UnityEditor;
 
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 using CompressionLevel = System.IO.Compression.CompressionLevel;
+using PackageJson = Mochizuki.VariationPackager.Models.Json.Package;
 
 namespace Mochizuki.VariationPackager
 {
@@ -41,9 +43,10 @@ namespace Mochizuki.VariationPackager
         {
             EditorGUILayout.Space();
 
-            EditorGUILayout.LabelField("Create a packages from Assets/package.json.");
+            EditorGUILayout.LabelField("Create a packages from Assets/package.json or Script Configuration in current scene.");
+            EditorGUILayout.LabelField("Priority: Assets/package.json > Script Configuration");
 
-            EditorGUI.BeginDisabledGroup(!IsExistsPackageJson());
+            EditorGUI.BeginDisabledGroup(!IsExistsPackageJson() && !IsExistsScriptConfiguration());
 
             if (GUILayout.Button("Create Packages"))
             {
@@ -58,6 +61,12 @@ namespace Mochizuki.VariationPackager
         private bool IsExistsPackageJson()
         {
             return File.Exists(_packageJsonPath);
+        }
+
+        private static bool IsExistsScriptConfiguration()
+        {
+            var objects = SceneManager.GetActiveScene().GetRootGameObjects();
+            return objects.Any(w => w.GetComponentInChildren<IPackage>() != null);
         }
 
         private void CreatePackage()
@@ -78,13 +87,17 @@ namespace Mochizuki.VariationPackager
             }
         }
 
-        private Package ReadMetadata()
+        private IPackage ReadMetadata()
         {
-            using (var sr = new StreamReader(_packageJsonPath))
-                return JsonConvert.DeserializeObject<Package>(sr.ReadToEnd());
+            if (IsExistsPackageJson())
+                using (var sr = new StreamReader(_packageJsonPath))
+                    return JsonConvert.DeserializeObject<PackageJson>(sr.ReadToEnd());
+
+            var objects = SceneManager.GetActiveScene().GetRootGameObjects();
+            return objects.SelectMany(w => w.GetComponentsInChildren<IPackage>()).First();
         }
 
-        private static bool ValidateProperties(Package meta)
+        private static bool ValidateProperties(IPackage meta)
         {
             if (string.IsNullOrWhiteSpace(meta.Name))
                 return false;
@@ -101,7 +114,7 @@ namespace Mochizuki.VariationPackager
             return meta.Describe.Variations.All(w => w?.UnityPackage.Includes != null && w.UnityPackage.Includes.Count > 0);
         }
 
-        private static void CreatePackage(Package meta, PackageVariation variation)
+        private static void CreatePackage(IPackage meta, IPackageVariation variation)
         {
             var dest = CreateUnityPackage(meta, variation);
             if (variation.Archive == null)
@@ -112,7 +125,7 @@ namespace Mochizuki.VariationPackager
             File.Delete(dest);
         }
 
-        private static string CreateUnityPackage(Package meta, PackageVariation variation)
+        private static string CreateUnityPackage(IPackage meta, IPackageVariation variation)
         {
             var matcher = new Matcher();
             matcher.AddIncludePatterns(variation.UnityPackage.Includes);
@@ -134,7 +147,7 @@ namespace Mochizuki.VariationPackager
             return publishTo;
         }
 
-        private static void CreateZipPackage(Package meta, PackageVariation variation, string publishedTo)
+        private static void CreateZipPackage(IPackage meta, IPackageVariation variation, string publishedTo)
         {
             var matcher = new Matcher();
             if (variation.Archive?.Includes != null)

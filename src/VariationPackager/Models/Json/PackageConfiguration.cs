@@ -1,27 +1,23 @@
 ﻿using System.Collections.Generic;
 
-using JetBrains.Annotations;
+using Mochizuki.VariationPackager.Models.Interface;
 
 using Newtonsoft.Json;
 
-namespace Mochizuki.VariationPackager.Internal.Models
+namespace Mochizuki.VariationPackager.Models.Json
 {
-    public class PackageConfiguration
+    public class PackageConfiguration : IPackageConfiguration
     {
         [JsonProperty("name")]
-        [CanBeNull]
         public string Name { get; set; }
 
         [JsonProperty("basedir")]
-        [CanBeNull]
         public string BaseDir { get; set; }
 
         [JsonProperty("includes")]
-        [CanBeNull]
         public List<string> Includes { get; set; }
 
         [JsonProperty("excludes")]
-        [CanBeNull]
         public List<string> Excludes { get; set; }
     }
 }
