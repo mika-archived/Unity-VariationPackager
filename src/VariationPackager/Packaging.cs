@@ -25,7 +25,7 @@ namespace Mochizuki.VariationPackager
     {
         private string _packageJsonPath;
 
-        [MenuItem("Mochizuki/Variation Packager")]
+        [MenuItem("Mochizuki/Variation Packager/Packaging")]
         public static void ShowWindow()
         {
             var window = GetWindow<Packaging>();

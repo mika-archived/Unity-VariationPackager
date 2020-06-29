@@ -12,6 +12,7 @@ A Unity editor extension for creating multiple packages from Scene or JSON.
   - Only the difference between including and excluding assets is supported
 - Support `package.json` like NPM (UPM)
 - Support C# Script in current scene
+- Glob pattern supported in listing files
 
 ## Package Configuration
 
