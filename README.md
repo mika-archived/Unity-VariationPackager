@@ -14,7 +14,7 @@ A Unity editor extension for creating multiple packages from JSON file.
 
 ## JSON Schema
 
-Create the following JSON file in your `Assets` directory.  
+Create the following JSON file in your `Assets` directory that named as `package.json`.  
 If this file exists, you can add it to the `moe.mochizuki.unity.packaging` entry.
 
 ```javascript
