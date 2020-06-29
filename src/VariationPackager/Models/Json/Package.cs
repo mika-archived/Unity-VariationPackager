@@ -1,4 +1,9 @@
-﻿using Mochizuki.VariationPackager.Models.Interface;
+﻿/*-------------------------------------------------------------------------------------------
+ * Copyright (c) Fuyuno Mikazuki / Natsuneko. All rights reserved.
+ * Licensed under the MIT License. See LICENSE in the project root for license information.
+ *------------------------------------------------------------------------------------------*/
+
+using Mochizuki.VariationPackager.Models.Interface;
 
 using Newtonsoft.Json;
 
@@ -13,7 +18,7 @@ namespace Mochizuki.VariationPackager.Models.Json
             Describe = describe;
         }
 
-        public IPackageDescribe Describe { get; set; }
+        public IPackageDescribe Describe { get; }
 
         [JsonProperty("name")]
         public string Name { get; set; }

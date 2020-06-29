@@ -1,4 +1,9 @@
-﻿using System.Collections.Generic;
+﻿/*-------------------------------------------------------------------------------------------
+ * Copyright (c) Fuyuno Mikazuki / Natsuneko. All rights reserved.
+ * Licensed under the MIT License. See LICENSE in the project root for license information.
+ *------------------------------------------------------------------------------------------*/
+
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
@@ -13,12 +18,15 @@ namespace Mochizuki.VariationPackager
 {
     internal class GlobDebugger : EditorWindow
     {
+        // ReSharper disable once CollectionNeverUpdated.Local
         [SerializeField]
         private List<string> _excludes;
 
+        // ReSharper disable once CollectionNeverUpdated.Local
         [SerializeField]
         private List<string> _includes;
 
+        // ReSharper disable once CollectionNeverUpdated.Local
         private List<string> _matches;
 
         private Vector2 _scrollPosition;
