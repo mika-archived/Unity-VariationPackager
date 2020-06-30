@@ -36,11 +36,14 @@ Attach `Mochizuki/VariationPackager/Package` to GameObject in your scene and con
 | `Describe.Variations.UnityPackage.BaseDir`  |    No    | Unused in Unity Package. Ignored.                                            |
 | `Describe.Variations.UnityPackage.Includes` |   Yes    | Array of file paths (support glob) that including to package                 |
 | `Describe.Variations.UnityPackage.Excludes` |    No    | Array of file paths (support glob) that excluding from package               |
+| `PreProcessors`                             |    No    | Array of pre-process C# scripts for building packages                        |
+| `PostProcessors`                            |    No    | Array of post-process C# scripts for builded packages                        |
 
 ### JSON Schema
 
 Create the following JSON file in your `Assets` directory that named as `package.json`.  
-If this file exists, you can add it to the `moe.mochizuki.unity.packaging` entry.
+If this file exists, you can add it to the `moe.mochizuki.unity.packaging` entry.  
+JSON type build manifest does not support pre/post processors.
 
 ```javascript
 {
