@@ -40,6 +40,13 @@ namespace Mochizuki.VariationPackager
             window.Show();
         }
 
+        public void OnEnable()
+        {
+            _excludes = new List<string>();
+            _includes = new List<string>();
+            _matches = new List<string>();
+        }
+
         public void OnGUI()
         {
             EditorGUILayout.Space();
