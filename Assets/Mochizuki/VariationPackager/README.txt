@@ -25,3 +25,19 @@ https://docs.mochizuki.moe/Unity/VariationPackager
 詳しくは下記ページをご確認ください。
 
 https://docs.mochizuki.moe/Terms/UnityEditor_R20200630
+
+
+## サードパーティーライセンス
+
+### Microsoft.Extensions.FileSystemGlobbing
+
+Apache License 2.0
+License Information (Distribution) : ./Notices/Microsoft.Extensions.FileSystemGlobbing/LICENSE
+License Information (Internet)     : https://github.com/dotnet/extensions/blob/v3.1.5/LICENSE.txt
+
+
+### Newtonsoft.Json
+
+MIT License
+License Information (Distribution) : ./Notices/Newtonsoft.Json/LICENSE
+License Information (Internet)     : https://github.com/JamesNK/Newtonsoft.Json/blob/master/LICENSE.md
