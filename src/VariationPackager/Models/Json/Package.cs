@@ -3,6 +3,8 @@
  * Licensed under the MIT License. See LICENSE in the project root for license information.
  *------------------------------------------------------------------------------------------*/
 
+using System.Collections.Generic;
+
 using Mochizuki.VariationPackager.Models.Interface;
 
 using Newtonsoft.Json;
@@ -16,6 +18,10 @@ namespace Mochizuki.VariationPackager.Models.Json
                        PackageDescribe describe)
         {
             Describe = describe;
+
+            // package.json does not support below properties
+            PreProcessors = new List<IProcessor>();
+            PostProcessors = new List<IProcessor>();
         }
 
         public IPackageDescribe Describe { get; }
@@ -25,5 +31,9 @@ namespace Mochizuki.VariationPackager.Models.Json
 
         [JsonProperty("version")]
         public string Version { get; set; }
+
+        public List<IProcessor> PreProcessors { get; }
+
+        public List<IProcessor> PostProcessors { get; }
     }
 }

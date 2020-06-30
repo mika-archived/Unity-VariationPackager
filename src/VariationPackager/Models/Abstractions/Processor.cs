@@ -3,20 +3,17 @@
  * Licensed under the MIT License. See LICENSE in the project root for license information.
  *------------------------------------------------------------------------------------------*/
 
-using System.Collections.Generic;
+using System;
 
-namespace Mochizuki.VariationPackager.Models.Interface
+using Mochizuki.VariationPackager.Models.Interface;
+
+using UnityEngine;
+
+namespace Mochizuki.VariationPackager.Models.Abstractions
 {
-    public interface IPackage
+    [Serializable]
+    public class Processor : MonoBehaviour, IProcessor
     {
-        string Name { get; }
-
-        string Version { get; }
-
-        IPackageDescribe Describe { get; }
-
-        List<IProcessor> PreProcessors { get; }
-
-        List<IProcessor> PostProcessors { get; }
+        public virtual void Run() { }
     }
 }

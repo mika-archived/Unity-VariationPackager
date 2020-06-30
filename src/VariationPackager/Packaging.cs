@@ -51,6 +51,8 @@ namespace Mochizuki.VariationPackager
             EditorGUILayout.LabelField("Create a packages from Assets/package.json or Script Configuration in current scene.");
             EditorGUILayout.LabelField("Priority: Assets/package.json > Script Configuration");
 
+            EditorGUILayout.Space();
+
             EditorGUI.BeginDisabledGroup(!IsExistsPackageJson() && !IsExistsScriptConfiguration());
 
             if (GUILayout.Button("Create Packages"))
@@ -82,8 +84,14 @@ namespace Mochizuki.VariationPackager
 
             try
             {
+                foreach (var preprocessor in meta.PreProcessors)
+                    preprocessor.Run();
+
                 foreach (var variation in meta.Describe.Variations)
                     CreatePackage(meta, variation);
+
+                foreach (var postprocessor in meta.PostProcessors)
+                    postprocessor.Run();
             }
             catch (Exception e)
             {
