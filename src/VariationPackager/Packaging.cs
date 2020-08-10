@@ -28,6 +28,7 @@ namespace Mochizuki.VariationPackager
 {
     internal class Packaging : EditorWindow
     {
+        private bool _isKeepUnityPackage;
         private string _packageJsonPath;
 
         [MenuItem("Mochizuki/Variation Packager/Packaging")]
@@ -52,6 +53,9 @@ namespace Mochizuki.VariationPackager
             EditorGUILayout.LabelField("Priority: Assets/package.json > Script Configuration");
 
             EditorGUILayout.Space();
+
+            EditorGUIUtility.labelWidth = 275;
+            _isKeepUnityPackage = EditorGUILayout.Toggle("Keep a UnityPackage when create Zip Archive", _isKeepUnityPackage);
 
             EditorGUI.BeginDisabledGroup(!IsExistsPackageJson() && !IsExistsScriptConfiguration());
 
@@ -88,7 +92,7 @@ namespace Mochizuki.VariationPackager
                     preprocessor.Run();
 
                 foreach (var variation in meta.Describe.Variations)
-                    CreatePackage(meta, variation);
+                    CreatePackage(meta, variation, _isKeepUnityPackage);
 
                 foreach (var postprocessor in meta.PostProcessors)
                     postprocessor.Run();
@@ -127,7 +131,7 @@ namespace Mochizuki.VariationPackager
             return meta.Describe.Variations.All(w => w?.UnityPackage.Includes != null && w.UnityPackage.Includes.Count > 0);
         }
 
-        private static void CreatePackage(IPackage meta, IPackageVariation variation)
+        private static void CreatePackage(IPackage meta, IPackageVariation variation, bool isKeepUnityPackage)
         {
             var dest = CreateUnityPackage(meta, variation);
             if (variation.Archive == null)
@@ -135,7 +139,17 @@ namespace Mochizuki.VariationPackager
 
             CreateZipPackage(meta, variation, dest);
 
-            File.Delete(dest);
+            if (isKeepUnityPackage)
+            {
+                var basename = Path.GetDirectoryName(dest);
+                var filename = Path.GetFileNameWithoutExtension(dest);
+                var extension = Path.GetExtension(dest);
+                File.Move(dest, $"{basename}/{filename}-{meta.Version}{extension}");
+            }
+            else
+            {
+                File.Delete(dest);
+            }
         }
 
         private static string CreateUnityPackage(IPackage meta, IPackageVariation variation)
@@ -155,6 +169,9 @@ namespace Mochizuki.VariationPackager
 
             var destName = string.IsNullOrWhiteSpace(variation.UnityPackage.Name) ? $"{meta.Name}.unitypackage" : $"{variation.UnityPackage.Name}.unitypackage";
             var publishTo = Path.Combine(destDirectory, destName);
+            if (File.Exists(publishTo))
+                File.Delete(publishTo);
+
             AssetDatabase.ExportPackage(assets.ToArray(), publishTo, ExportPackageOptions.IncludeDependencies);
 
             return publishTo;
