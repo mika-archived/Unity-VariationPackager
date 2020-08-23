@@ -161,8 +161,7 @@ MonoBehaviour:
         _excludes:
         - '**/Processors/*.cs'
         - '**/Packaging/*.cs'
-  _preProcessors:
-  - {fileID: 222151516}
+  _preProcessors: []
   _postProcessors: []
 --- !u!4 &25775596
 Transform:
