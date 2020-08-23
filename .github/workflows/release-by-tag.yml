@@ -15,11 +15,11 @@ jobs:
     steps:
       - name: Upgrade Git to latest version
         run: |
-          apt update
+          apt update -qq
           apt install software-properties-common -y
           add-apt-repository ppa:git-core/ppa -y
-          apt update
-          apt install git -y
+          apt update -qq
+          apt install git git-lfs -y
 
       - uses: actions/checkout@v2
         with:
