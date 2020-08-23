@@ -48,6 +48,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CLI.cs" />
     <Compile Include="GlobDebugger.cs" />
     <Compile Include="Models\Abstractions\Processor.cs" />
     <Compile Include="Models\Interface\IPackage.cs" />
