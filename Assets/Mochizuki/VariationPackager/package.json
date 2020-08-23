@@ -1,5 +1,5 @@
 {
-  "name": "moe.mochizuki.variation-packager",
+  "name": "@mikazuki/moe.mochizuki.variation-packager",
   "displayName": "Mochizuki.VariationPackager",
   "description": "A Unity editor extension for creating multiple packages from Scene or JSON.",
   "version": "0.2.0",
