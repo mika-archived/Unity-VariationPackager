@@ -45,7 +45,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: Release Artifacts
-          path: ./Asset/Mochizuki/Packages/
+          path: ./Assets/Mochizuki/Packages/
 
   release-by-tag-npm:
     runs-on: ubuntu-latest
