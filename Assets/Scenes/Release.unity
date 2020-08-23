@@ -142,7 +142,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _name: Unity-VariationPackager
-  _version: 0.2.1
+  _version: 0.3.0
   _describe:
     _output: Mochizuki/Packages
     _variations:
@@ -160,8 +160,8 @@ MonoBehaviour:
         - Mochizuki/VariationPackager/**/*
         _excludes:
         - '**/Processors/*.cs'
-  _preProcessors:
-  - {fileID: 222151516}
+        - '**/Packaging/*.cs'
+  _preProcessors: []
   _postProcessors: []
 --- !u!4 &25775596
 Transform:
