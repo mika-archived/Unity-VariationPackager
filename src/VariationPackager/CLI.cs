@@ -13,6 +13,7 @@ using Mochizuki.VariationPackager.Models.Json;
 using Newtonsoft.Json;
 
 using UnityEditor;
+using UnityEditor.SceneManagement;
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -26,7 +27,7 @@ namespace Mochizuki.VariationPackager
     {
         public static void BuildWithScene(string scene, bool isKeepUnityPackage)
         {
-            SceneManager.LoadScene(scene, LoadSceneMode.Single);
+            EditorSceneManager.OpenScene(scene, OpenSceneMode.Single);
             CreatePackage(Path.Combine(Application.dataPath, "package.json"), isKeepUnityPackage);
         }
 

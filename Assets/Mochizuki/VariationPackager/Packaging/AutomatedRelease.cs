@@ -5,7 +5,7 @@
     {
         public static void Build()
         {
-            CLI.BuildWithScene("Release", true);
+            CLI.BuildWithScene("Assets/Scenes/Release.unity", true);
         }
     }
 }
