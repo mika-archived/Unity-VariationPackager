@@ -26,7 +26,7 @@ jobs:
 
       - name: Create Packages by Variation Packager
         run: |
-          /opt/Unity/Editor/Unity/ -quit -batchmode -nographics -silent-crashes -logFile -projectPath /root/project -executeMethod Mochizuki.VariationPackager.Packaging.AutomatedRelease.Build
+          /opt/Unity/Editor/Unity -quit -batchmode -nographics -silent-crashes -logFile -projectPath /root/project -executeMethod Mochizuki.VariationPackager.Packaging.AutomatedRelease.Build
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v2
