@@ -3,7 +3,7 @@ name: Release by Tag
 on:
   push:
     branches:
-      - "features/**"
+      - "feature/**"
     tags:
       - "v**"
 
