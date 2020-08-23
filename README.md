@@ -14,6 +14,39 @@ A Unity editor extension for creating multiple packages from Scene or JSON.
 - Support C# Script in current scene
 - Glob pattern supported in listing files
 
+## Installation
+
+1. Download `UnityPackage` from BOOTH
+2. Install via NPM
+
+### Download UnityPackage
+
+You can download latest version of UnityPackage from [BOOTH](https://natsuneko.booth.pm/items/2182778).  
+Extract downloaded zip package and install UnityPackage into your project.
+
+### Install via NPM
+
+Please add the following section to the top of the package manifest file (`Packages/manifest.json`).  
+If the package manifest file already has a `scopedRegistry` section, it will bee added there.
+
+```json
+{
+  "scopedRegistries": [
+    {
+      "name": "Mochizuki",
+      "url": "https://registry.npmjs.com",
+      "scopes": ["moe.mochizuki"]
+    }
+  ]
+}
+```
+
+And the following line to the `dependencies` section:
+
+```json
+"moe.mochizuki.variation-packager": "VERSION"
+```
+
 ## Package Configuration
 
 You can choose from two configuration types.
