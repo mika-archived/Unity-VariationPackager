@@ -142,7 +142,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _name: Unity-VariationPackager
-  _version: 0.2.0
+  _version: 0.2.1
   _describe:
     _output: Mochizuki/Packages
     _variations:

@@ -4,17 +4,20 @@
  *------------------------------------------------------------------------------------------*/
 
 using System;
+using System.Collections.Generic;
 
 using Mochizuki.VariationPackager.Models.Interface;
 
 using UnityEngine;
 
-// ReSharper disable UnassignedField.Local
+#pragma warning disable 649
+
+// ReSharper disable once CheckNamespace
 
 namespace Mochizuki.VariationPackager.Models.Unity
 {
     [Serializable]
-    public class PackageVariation : IPackageVariation
+    public class PackageConfiguration : IPackageConfiguration
     {
         #region Name
 
@@ -29,23 +32,42 @@ namespace Mochizuki.VariationPackager.Models.Unity
 
         #endregion
 
-        #region Archive
+        #region BaseDir
 
-        // Unity could not serialize interfaces, so we provide internal accessor.
         [SerializeField]
-        private PackageConfiguration _archive;
+        private string _baseDir;
 
-        public IPackageConfiguration Archive => _archive;
+        public string BaseDir
+        {
+            get => _baseDir;
+            set => _baseDir = value;
+        }
 
         #endregion
 
-        #region UnityPackage
+        #region Includes
 
-        // Unity could not serialize interfaces, so we provide internal accessor.
         [SerializeField]
-        private PackageConfiguration _unityPackage;
+        private List<string> _includes;
 
-        public IPackageConfiguration UnityPackage => _unityPackage;
+        public List<string> Includes
+        {
+            get => _includes;
+            set => _includes = value;
+        }
+
+        #endregion
+
+        #region Excludes
+
+        [SerializeField]
+        private List<string> _excludes;
+
+        public List<string> Excludes
+        {
+            get => _excludes;
+            set => _excludes = value;
+        }
 
         #endregion
     }

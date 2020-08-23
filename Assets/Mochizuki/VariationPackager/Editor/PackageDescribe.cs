@@ -11,6 +11,10 @@ using Mochizuki.VariationPackager.Models.Interface;
 
 using UnityEngine;
 
+#pragma warning disable 649
+
+// ReSharper disable once CheckNamespace
+
 namespace Mochizuki.VariationPackager.Models.Unity
 {
     [Serializable]

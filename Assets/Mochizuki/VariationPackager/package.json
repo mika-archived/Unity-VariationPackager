@@ -1,0 +1,12 @@
+{
+  "name": "moe.mochizuki.variation-packager",
+  "displayName": "Mochizuki.VariationPackager",
+  "description": "A Unity editor extension for creating multiple packages from Scene or JSON.",
+  "version": "0.2.0",
+  "unity": "2018.3",
+  "keywords": [
+    ""
+  ],
+  "license": "MIT",
+  "dependencies": {}
+}
