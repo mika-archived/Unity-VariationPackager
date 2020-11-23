@@ -123,7 +123,7 @@ namespace Mochizuki.VariationPackager
             if (File.Exists(publishTo))
                 File.Delete(publishTo);
 
-            AssetDatabase.ExportPackage(assets.ToArray(), publishTo, ExportPackageOptions.IncludeDependencies);
+            AssetDatabase.ExportPackage(assets.ToArray(), publishTo, ExportPackageOptions.Default);
 
             return publishTo;
         }
